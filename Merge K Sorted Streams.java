@@ -168,3 +168,80 @@ Follow Up code
 <B> merge k sorted streams，原题，但是楼主对iterator不是特别熟悉
 <C> stream 的type是iterator，input是（streams，k）
 http://www.1point3acres.com/bbs/thread-148694-2-1.html 这里面有两个讨论的code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public List<Integer> findConsensus(List<Iterator> streams, int m) {
+	List<Integer> result = new ArrayList<>();
+	if (streams == null || streams.length == 0) {
+		return result;
+	}
+
+	PriorityQueue<Iterator> heap = new PriorityQueue<Iterator>(11, new Comparator<Iterator>() {
+		public int compare (Iterator i1, Iterator i2) {
+			return i1.peek() - i2.peek();
+		}
+	});
+
+	for (Iterator stream : streams) {
+		if (stream.hasNext()) {
+			heap.offer(stream);
+		}
+	}
+
+	while (!heap.isEmpty()) {
+
+		Iterator cur = heap.poll();
+		int curVal = cur.peek();
+		int count = 1;
+
+		// skip the duplicates, and put the udpate iterator into heap
+		while (cur.hasNext()) {
+			if (curVal == cur.peek()) {
+				cur.next();
+			} else {
+				break;
+			}
+		}
+
+		if (cur.hasNext()) {
+			heap.offer(cur);
+		}
+
+
+		// find next same val
+		while (!heap.isEmpty() && curVal == heap.peek().peek()) {
+			count++;
+			Iterator temp = heap.poll();
+			while (temp.hasNext()) {
+				if (temp.peek() == curVal) {
+					temp.next();
+				}  else {
+					break;
+				}
+			}
+			if (temp.hasNext()) {
+				heap.offer(temp);
+			}
+		}
+
+		if (count >= m) {
+			result.add(curVal);
+		}
+	}
+	return result;
+}
