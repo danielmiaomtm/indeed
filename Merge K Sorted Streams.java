@@ -57,7 +57,8 @@ class Merge_K_Sorted_Streams {
                 minHeap.offer(new Num(s));
             }
         }
-
+	//优化
+	// while (minHeap.size() < k) {
         while (!minHeap.isEmpty()){
             Num cur = minHeap.poll();
             int curValue = cur.val;
