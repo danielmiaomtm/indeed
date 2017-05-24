@@ -3,12 +3,20 @@ Input = [1, 2, 3, 5, 7, 8, 9, 10,15]
 Out = "1-3, 5, 7-9, 10, 15"
 */
 
-public String rangeSummary (int[] nums) {
+	public String rangeSummary (int[] nums) {
 		StringBuilder sb = new StringBuilder();
+		
 		int pre = 0;
-		int preVal = 0;
+		int preVal = nums[0];
+		
 		for (int i = 1; i < nums.length; i++) {
-			if (nums[i] - nums[pre] == 1) {
+			//如果有重复的话
+			/*
+			if (i + 1 < nums.length && nums[i] == nums[i + 1]) {
+				continue;
+			}
+			*/
+			if (nums[i] - preVal == 1) {
 				preVal = nums[i];
 				continue;
 			} else {
