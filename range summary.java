@@ -33,7 +33,7 @@ Out = "1-3, 5, 7-9, 10, 15"
 		if (pre == nums.length - 1) {
 			sb.append(nums[pre]);
 		} else {
-			sb.append(preVal).append("-").append(nums[nums.length - 1]);
+			sb.append(nums[pre]).append("-").append(nums[nums.length - 1]);
 		}
 		
 		return sb.toString();
