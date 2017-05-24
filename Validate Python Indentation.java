@@ -2,6 +2,10 @@
 Question Description:
 Python is validate by indent before each line of code, so given a list of Strings
 which indicates the lines of Python code. Validate if it meets the requirement
+规则1，第一行的code必须没有缩进，
+规则2，尾巴是冒号的行一定是control statement，
+规则3，control statement下面一行一定要有更多的缩进，
+规则4，同一个block里面的缩进一定要相同。
 =============================================================================*/
 /* =============================================================================
 code
